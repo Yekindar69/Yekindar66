@@ -1,0 +1,8 @@
+my-github-blog/
+├── .github/
+│   └── workflows/
+│       └── pages-deploy.yml  # GitHub Actions部署配置文件
+├── articles/
+│   └── first-blog.html       # 第一篇博客文章
+├── index.html                # 博客首页
+└── README.md
