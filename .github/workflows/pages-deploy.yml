@@ -1,8 +1,29 @@
-my-github-blog/
-├── .github/
-│   └── workflows/
-│       └── pages-deploy.yml  # GitHub Actions部署配置文件
-├── articles/
-│   └── first-blog.html       # 第一篇博客文章
-├── index.html                # 博客首页
-└── README.md
+name: Deploy Blog to GitHub Pages
+on:
+  push:
+    branches: [ main ]
+
+# 权限必须完整，缺一项都会部署失败
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload static blog files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
